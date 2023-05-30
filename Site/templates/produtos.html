@@ -22,6 +22,8 @@
                     <!-- Inicio Produtos -->
                     {% for prod in produtos %} 
                         {% include 'card_produto.html' %}
+                        {% empty %}
+                        <p> Nenhum produto encontrado para este departamento !!</p>
                     {% endfor %}
 
                     <!-- termino produtos-->
