@@ -1,7 +1,11 @@
 {% extends 'base.html' %}
 
-{% block Titulo%} Sobre Contato {% endblock Titulo %}
+{% block Titulo%} 
+Contato 
+{% endblock Titulo %}
 
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
 {% block Conteudo %}
            <!-- Header-->
            <header class="bg-light py-1">
@@ -14,7 +18,25 @@
         <!-- Section-->
         <section class="py-5">
             <div class = "container">
-            {% lorem 1 p random %}
+                {% if mensagem %}
+                <div class="alert alert-info" role="alert">
+                    {{mensagem}}
+                  </div>
+                {% endif %}
+
+                <form action="{% url 'contato' %}" method="POST">
+
+                    {% csrf_token %}
+                    <div class = "w-50 mx-auto ">
+                    {{ form_contato|crispy }}
+                    <input type="submit" value="Enviar" class="btn btn-primary">
+                    </div>
+
+                </form>
+
             </div>
         </section>
+
+      
+
 {% endblock Conteudo %}

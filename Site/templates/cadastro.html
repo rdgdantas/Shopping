@@ -2,6 +2,8 @@
 
 {% block Titulo%} Cadastros {% endblock Titulo %}
 
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
 {% block Conteudo %}
            <!-- Header-->
            <header class="bg-light py-1">
@@ -14,14 +16,25 @@
         <!-- Section-->
         <section class="py-5">
             <div class = "container">
-                <form action="{% url 'cadastro' %}" method = "POST">
-                    {% csrf_token %}
-                    <table class="table">
-                    {{ form_cliente.as_table }}
-                    </table>
+                {% if mensagem %}
+                <div class="alert alert-info" role="alert">
+                    {{mensagem}}
+                  </div>
+                {% endif %}
 
-                    <input type="submit" value="Enviar">
+                <form action="{% url 'cadastro' %}" method="POST">
+
+                    {% csrf_token %}
+                    <div class = "w-50 mx-auto ">
+                    {{ form_cliente|crispy }}
+                    <input type="submit" value="Enviar" class="btn btn-primary">
+                    </div>
+
                 </form>
+
             </div>
         </section>
+
+      
+
 {% endblock Conteudo %}
